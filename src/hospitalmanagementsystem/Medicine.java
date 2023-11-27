@@ -8,18 +8,19 @@ package hospitalmanagementsystem;
  *
  * @author lamashuhail
  */
-public class Medicine{
-  private String medicineCode;
-  private String medicineName;
-  private double dose;
+
+public class Medicine {
+    
+private String medicineCode;
+private String medicineName;
+private double dose;
 private int quantity;
 
 public Medicine(){}
-
 public Medicine(String medicineCode, String medicineName, double dose, int quantity){
-  this.medicineCode=medicineCode;
-   this.medicineName=medicineName;
-   this.dose=dose;
+ this.medicineCode=medicineCode;
+ this.medicineName=medicineName;
+ this.dose=dose;
  this.quantity=quantity;
 }
 
@@ -51,10 +52,8 @@ public void setDose(double dose){
 this.dose=dose;
 }
 
-public void setquantity(int quantity){
+public void setQuantity(int quantity){
 this.quantity=quantity;
 }
 
 }
-
-

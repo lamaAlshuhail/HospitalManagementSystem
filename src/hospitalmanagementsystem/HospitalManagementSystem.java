@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package hospitalmanagementsystem;
+import java.util.ArrayList;
 import java.util.Scanner;
 /**
  *
@@ -19,18 +20,17 @@ public class HospitalManagementSystem {
         signupMenu();
         int choice = scanner.nextInt();
         scanner.nextLine();
+        ArrayList<User> sysUsers = new ArrayList<>(authManager.loadUsersFromFile());
+
         User user= null;
   if (choice == 1) {
     user = getUserDetails(scanner);
     boolean signUpResult = authManager.authenticate(user.getID(), user.getPassword());
-    if (signUpResult) {
+    if (authManager.userLookUp(user.getID())) {
         System.out.println("User with the same ID already exists. Please try again.");
     } else {
-        if (authManager.saveUser(user)) {
-            System.out.println("Sign Up Successful.");
-        } else {
-            System.out.println("Sign Up Failed, please try again later.");
-        }
+       authManager.addUser(user);
+       System.out.println("Sign Up Successful.");  
     }
 } else if (choice == 2) {
     System.out.println("Enter your ID: ");
@@ -39,16 +39,16 @@ public class HospitalManagementSystem {
     String password = scanner.nextLine();
     if (authManager.authenticate(ID, password)) {
         System.out.println("Log in successful.");
-        String userInfo = authManager.getUserByID(ID);
-        if (userInfo != null) {
-            String[] userInfoParts = userInfo.split(",");
-            String userID = userInfoParts[0];
-            String userPass = userInfoParts[1];
-            String userType = userInfoParts[2];
-            switch(userType){
+        user = authManager.getUserByID(ID);
+//        if (userDetails.getID() != null) {
+//            String[] userInfoParts = userInfo.split(",");
+//            String userID = userInfoParts[0];
+//            String userPass = userInfoParts[1];
+//            String userType = userInfoParts[2];
+            switch(user.getType()){
                 case "Admin":
                     
-                    user = new Admin(userID, userPass,userType);
+                    user = new Admin(user.getID(), user.getPassword(),user.getType());
                     adminStartPage();
                     int choice1 = scanner.nextInt();
                     switch (choice1){
@@ -57,15 +57,11 @@ public class HospitalManagementSystem {
                         case 2:
                             System.out.print("User's ID: ");
                             String idToBeUpdated = scanner.next();
-                            if (user instanceof Admin)
-                            ((Admin)user).updateUser(user, scanner, authManager);
+                            
                             break;
                         case 3: 
                             System.out.print("User's ID: ");
                             String idToBeDeleted = scanner.next();
-                            if (user instanceof Admin)
-                                ((Admin)user).deleteUser(idToBeDeleted);
-                            
                             break;
                     }
                     break;
@@ -83,9 +79,9 @@ public class HospitalManagementSystem {
 //            } else if (userType.equals("Receptionist")) {
 //                receptionistStartPage();
 //            }
-        } else {
-            System.out.println("User not found.");
-        }
+//        } else {
+//            System.out.println("User not found.");
+//        }
     } else {
         System.out.println("Log in failed.");
     }
