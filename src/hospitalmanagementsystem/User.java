@@ -24,19 +24,38 @@ public class User {
         
     }
     public User(String firstName, String lastName, String ID, int age, char gender, String phoneNumber, String password, String type){
-        this.firstName=firstName;
-        this.lastName=lastName;
-        this.ID=ID;
-        this.age=age;
-        this.gender=gender;
-        this.phoneNumber=phoneNumber;
-    if (verifyPassword()) {
+           this.firstName = firstName;
+    this.lastName = lastName;
+    this.ID = ID;
+    this.age = age;
+    this.gender = gender;
+    this.phoneNumber = phoneNumber;
+    if (verifyPassword(password)) {
         this.password = password;
     } else {
         throw new IllegalArgumentException("Invalid password.");
     }
+    this.type = type;
+    }
+    public User(String ID, String password, String type){
+        this.ID=ID;
+        this.password=password;
         this.type=type;
     }
+   
+//        public User(String firstName, String lastName, String ID, int age, char gender, String phoneNumber, String password){
+//            this.firstName = firstName;
+//    this.lastName = lastName;
+//    this.ID = ID;
+//    this.age = age;
+//    this.gender = gender;
+//    this.phoneNumber = phoneNumber;
+//    if (verifyPassword(password)) {
+//        this.password = password;
+//    } else {
+//        throw new IllegalArgumentException("Invalid password.");
+//    }
+//    }
 //*********Accessor/getters********
     
     public String getFirstName(){
@@ -100,19 +119,12 @@ public class User {
 //        } else {
 //            throw new IllegalArgumentException("Invalid password.");
 //        }
-Scanner scanner = new Scanner(System.in);
 
-    while (true) {
-        if (verifyPassword()) {
-            this.password = password;
-            break;
-        } else {
-            System.out.println("Invalid password. Please re-enter:");
-            password = scanner.nextLine();
-        }
-    }
-
-    scanner.close();
+if (verifyPassword(password)) {
+    this.password = password;
+} else {
+    throw new IllegalArgumentException("Invalid password.");
+}
         }
     
     
@@ -128,28 +140,27 @@ Scanner scanner = new Scanner(System.in);
 
     }
         
-    public boolean verifyPassword(){
-        boolean hasLowerCase, hasUpperCase, hasDigit;
-        int length=password.length();
-        hasLowerCase=false;
-        hasUpperCase=false;
-        hasDigit=false;
-        
-        for (int i=0; i<length; i++){
-            char c= password.charAt(i);
-            if(Character.isLowerCase(c))
-                hasLowerCase=true;
-            else if (Character.isUpperCase(c))
-                hasUpperCase=true;
-            else if (Character.isDigit(c))
-                hasDigit=true;
-            
-            if (hasLowerCase && hasUpperCase && hasDigit)
-                break;
-        }
-        return hasLowerCase && hasUpperCase && hasDigit && length >8;
-        
+    public boolean verifyPassword(String password) {
+    boolean hasLowerCase, hasUpperCase, hasDigit;
+    int length = password.length();
+    hasLowerCase = false;
+    hasUpperCase = false;
+    hasDigit = false;
+
+    for (int i = 0; i < length; i++) {
+        char c = password.charAt(i);
+        if (Character.isLowerCase(c))
+            hasLowerCase = true;
+        else if (Character.isUpperCase(c))
+            hasUpperCase = true;
+        else if (Character.isDigit(c))
+            hasDigit = true;
+
+        if (hasLowerCase && hasUpperCase && hasDigit)
+            break;
     }
+    return hasLowerCase && hasUpperCase && hasDigit && length > 8;
+}
     
 
     

@@ -4,6 +4,9 @@
  */
 package hospitalmanagementsystem;
 
+import java.util.Date;
+import java.util.List;
+
 /**
  *
  * @author lamashuhail
@@ -19,7 +22,7 @@ public class Receptionist extends User{
     
     
     public List<Appointment> viewAppointments(){
-        //sm code
+        List<Appointment> appointment = 
     }
     
     public void scheduleAppointment(Patient patient, Date date, Procedure procedure, Room room){
