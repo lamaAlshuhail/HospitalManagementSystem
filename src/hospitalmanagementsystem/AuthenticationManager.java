@@ -74,6 +74,11 @@ public class AuthenticationManager {
         }
         return false; // Authentication failed
     }
+    
+    public void updateUserList(ArrayList<User> sysUsers){
+        userList.clear();
+        userList.addAll(sysUsers);
+    }
 
    public void saveUsers() {
           try {

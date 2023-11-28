@@ -57,11 +57,32 @@ public class HospitalManagementSystem {
                         case 2:
                             System.out.print("User's ID: ");
                             String idToBeUpdated = scanner.next();
-                            
+                            User userToUpdate = authManager.getUserByID(idToBeUpdated);
+                            if(userToUpdate !=null){
+                                 if (user instanceof Admin){
+                                 ((Admin)user).updateUser(userToUpdate, scanner, authManager);
+//                                 authManager.updateUserList(sysUsers);
+
+                                 authManager.saveUsers();
+                                 }
+                                 else 
+                                     System.out.println("Cannot update");
+                            }
                             break;
                         case 3: 
                             System.out.print("User's ID: ");
                             String idToBeDeleted = scanner.next();
+                            User userToDelete= authManager.getUserByID(idToBeDeleted);
+
+                                if(idToBeDeleted !=null){
+                                 if (user instanceof Admin){
+                                 ((Admin)user).deleteUser(idToBeDeleted, sysUsers);
+                                 authManager.updateUserList(sysUsers);
+                                 authManager.saveUsers();
+                                 }
+                                 else 
+                                     System.out.println("Cannot delete");
+                            }
                             break;
                     }
                     break;

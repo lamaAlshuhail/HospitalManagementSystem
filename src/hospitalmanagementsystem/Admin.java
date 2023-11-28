@@ -7,15 +7,22 @@ import java.util.Scanner;
 
 public class Admin extends User {
     private List<User> userList;
-
+    private AuthenticationManager authManager;
     public Admin() {
         super();
         userList = new ArrayList<>();
     }
+    
+    
         public Admin(String ID, String password, String type) {
         super(ID, password, type);
         userList = new ArrayList<>();
     }
+        
+        public Admin(AuthenticationManager authManager) {
+        this.authManager = authManager;
+    }
+        
   public void addUser(User newUser) {
     boolean isDuplicate = userList.stream().anyMatch(user -> user.getID().equals(newUser.getID()));
 
@@ -28,53 +35,56 @@ public class Admin extends User {
 }
   
 
-    public void deleteUser(String ID) {
-        Iterator<User> iterator = userList.iterator();
-        boolean found = false;
+public void deleteUser(String ID, ArrayList<User> sysUsers) {
+    boolean found = false;
+    int index = -1;
 
-        while (iterator.hasNext()) {
-            User user = iterator.next();
-            if (user.getID().equals(ID)) {
-                iterator.remove();
-                found = true;
-                break;
-            }
-        }
-
-        if (found) {
-            System.out.println("User with ID " + ID + " has been deleted.");
-        } else {
-            System.out.println("User with ID " + ID + " doesn't exist.");
+    // Find the index of the user with the specified ID
+    for (int i = 0; i < sysUsers.size(); i++) {
+        User user = sysUsers.get(i);
+        if (user.getID().equals(ID)) {
+            found = true;
+            index = i;
+            break;
         }
     }
 
-    public void updateUser(User user, Scanner scanner) {
-        System.out.println("Which field would you like to update: ");
-        System.out.println("\t1. First Name\n\t2. Last Name\n\t3. ID\n\t4. Age\n\t5. Phone Number\n\t6. Password\n");
-        System.out.print("Field Numbers (You can choose more than one, separate by spaces): ");
-        scanner.nextLine();
-        String choices = scanner.nextLine();
-
-        if (!choices.isEmpty()) {
-            if (choices.length() > 1) {
-                String[] choiceArr = choices.split(" ");
-
-                for (String choice : choiceArr) {
-                    int fieldNumber = Integer.parseInt(choice);
-                    updateUserField(user, fieldNumber, scanner);
-                }
-            } else {
-                int choice = Integer.parseInt(choices);
-                updateUserField(user, choice, scanner);
-            }
-            
-            System.out.println("User updated successfully.");
-        } else {
-            System.out.println("No fields selected for update.");
-        }
+    if (found) {
+        sysUsers.remove(index);
+        System.out.println("User with ID " + ID + " has been deleted.");
+    } else {
+        System.out.println("User with ID " + ID + " doesn't exist.");
     }
+}
 
-    private void updateUserField(User user, int fieldNumber, Scanner scanner) {
+    public void updateUser(User user, Scanner scanner, AuthenticationManager authManager) {
+    System.out.println("Which field would you like to update: ");
+    System.out.println("\t1. First Name\n\t2. Last Name\n\t3. ID\n\t4. Age\n\t5. Phone Number\n\t6. Password\n");
+    System.out.print("Field Numbers (You can choose more than one, separate by spaces): ");
+    scanner.nextLine();
+    String choices = scanner.nextLine();
+
+    if (!choices.isEmpty()) {
+        if (choices.length() > 1) {
+            String[] choiceArr = choices.split(" ");
+
+            for (String choice : choiceArr) {
+                int fieldNumber = Integer.parseInt(choice);
+                updateUserField(user, fieldNumber, scanner, authManager);
+            }
+        } else {
+            int choice = Integer.parseInt(choices);
+            updateUserField(user, choice, scanner, authManager);
+        }
+
+        System.out.println("User updated successfully.");
+    } else {
+        System.out.println("No fields selected for update.");
+    }
+}
+
+
+    private void updateUserField(User user, int fieldNumber, Scanner scanner, AuthenticationManager authManager) {
         switch (fieldNumber) {
             case 1:
                 System.out.print("Enter the new first name: ");
@@ -89,7 +99,8 @@ public class Admin extends User {
             case 3:
                 System.out.print("Enter the new ID: ");
                 String newID = scanner.nextLine();
-                user.setID(newID);
+                if (authManager.userLookUp(newID))
+                user.setID(newID); //make sure id doesnt repeat
                 break;
             case 4:
                 System.out.print("Enter the new age: ");
@@ -105,7 +116,7 @@ public class Admin extends User {
             case 6:
                 System.out.print("Enter the new password: ");
                 String newPassword = scanner.nextLine();
-                user.setPassword(newPassword);
+                user.setPassword(newPassword); //Verify Pass later
                 break;
             default:
                 System.out.println("Invalid input, please try again later");

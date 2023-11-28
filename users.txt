@@ -1,7 +1,4 @@
 1,11223344lL!,Admin
-1,11223344lL!,Admin
-2,11223344lL!,Receptionist
 6,11223344lL!,Patient
 4,11223344lL!,Doctor
-10,11223344lL!,Receptionist
 9,11223344lL!,Patient
