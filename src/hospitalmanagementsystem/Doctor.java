@@ -15,6 +15,10 @@ public class Doctor extends User {
         this.speciality = speciality;
     }
     
+    public Doctor(String ID, String password, String type){
+        super(ID, password, type);
+    }
+    
     public String getSpeciality() {
         return speciality;
     }

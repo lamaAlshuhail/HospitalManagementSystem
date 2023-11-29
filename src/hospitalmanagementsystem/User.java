@@ -24,17 +24,13 @@ public class User {
         
     }
     public User(String firstName, String lastName, String ID, int age, char gender, String phoneNumber, String password, String type){
-           this.firstName = firstName;
+    this.firstName = firstName;
     this.lastName = lastName;
     this.ID = ID;
     this.age = age;
     this.gender = gender;
     this.phoneNumber = phoneNumber;
-    if (verifyPassword(password)) {
-        this.password = password;
-    } else {
-        throw new IllegalArgumentException("Invalid password.");
-    }
+    this.password=password;
     this.type = type;
     }
     public User(String ID, String password, String type){
@@ -114,12 +110,6 @@ public class User {
     }
 
     public void setPassword(String password) {
-//        if (verifyPassword()) {
-//            this.password = password;
-//        } else {
-//            throw new IllegalArgumentException("Invalid password.");
-//        }
-
 if (verifyPassword(password)) {
     this.password = password;
 } else {
@@ -141,6 +131,7 @@ if (verifyPassword(password)) {
     }
         
     public boolean verifyPassword(String password) {
+     
     boolean hasLowerCase, hasUpperCase, hasDigit;
     int length = password.length();
     hasLowerCase = false;
@@ -162,6 +153,17 @@ if (verifyPassword(password)) {
     return hasLowerCase && hasUpperCase && hasDigit && length > 8;
 }
     
+    public void displayPasswordRequirements() {
+        System.out.println("╔═══════════════════════════════════════════╗");
+        System.out.println("║          Password Requirements            ║");
+        System.out.println("╠═══════════════════════════════════════════╣");
+        System.out.println("║ - Minimum length: 8 characters            ║");
+        System.out.println("║ - At least one uppercase letter            ║");
+        System.out.println("║ - At least one lowercase letter            ║");
+        System.out.println("║ - At least one digit                       ║");
+        System.out.println("║ - At least one special character           ║");
+        System.out.println("╚═══════════════════════════════════════════╝");
+    }
 
     
     

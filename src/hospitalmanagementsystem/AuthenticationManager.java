@@ -111,14 +111,14 @@ public class AuthenticationManager {
         return null; // User not found
     }
 
-    public String getUserDataByID(String ID) {
-        for (User user : userList) {
-            if (user.getID().equals(ID)) {
-                return user.getID() + "," + user.getPassword() + "," + user.getType();
-            }
-        }
-        return null; // User not found
-    }
+//    public String getUserDataByID(String ID) {
+//        for (User user : userList) {
+//            if (user.getID().equals(ID)) {
+//                return user.getID() + "," + user.getPassword() + "," + user.getType();
+//            }
+//        }
+//        return null; // User not found
+//    }
 
     public void showDoctors() {
         showUsersByType("Doctor");

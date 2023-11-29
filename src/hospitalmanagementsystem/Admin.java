@@ -61,7 +61,6 @@ public void deleteUser(String ID, ArrayList<User> sysUsers) {
     System.out.println("Which field would you like to update: ");
     System.out.println("\t1. First Name\n\t2. Last Name\n\t3. ID\n\t4. Age\n\t5. Phone Number\n\t6. Password\n");
     System.out.print("Field Numbers (You can choose more than one, separate by spaces): ");
-    scanner.nextLine();
     String choices = scanner.nextLine();
 
     if (!choices.isEmpty()) {
@@ -97,11 +96,24 @@ public void deleteUser(String ID, ArrayList<User> sysUsers) {
                 user.setLastName(newLastName);
                 break;
             case 3:
-                System.out.print("Enter the new ID: ");
-                String newID = scanner.nextLine();
-                if (authManager.userLookUp(newID))
-                user.setID(newID); //make sure id doesnt repeat
-                break;
+            System.out.print("Enter the new ID: ");
+            String newID = scanner.nextLine();
+
+            boolean idExists = false;
+            for (User u : userList) {
+                if (!u.equals(user) && u.getID().equals(newID)) {
+                    idExists = true;
+                    // No break statement here
+                }
+            }
+
+            if (idExists) {
+                System.out.println("[ERROR] ID already exists");
+            } else {
+                user.setID(newID);
+            }
+            break;
+            
             case 4:
                 System.out.print("Enter the new age: ");
                 int newAge = scanner.nextInt();
@@ -114,9 +126,15 @@ public void deleteUser(String ID, ArrayList<User> sysUsers) {
                 user.setPhoneNumber(newPhoneNumber);
                 break;
             case 6:
+                displayPasswordRequirements();
                 System.out.print("Enter the new password: ");
                 String newPassword = scanner.nextLine();
-                user.setPassword(newPassword); //Verify Pass later
+                if (verifyPassword(newPassword)) {
+                    user.setPassword(newPassword);
+                } else {
+                    throw new IllegalArgumentException("Invalid password.");
+                }
+             
                 break;
             default:
                 System.out.println("Invalid input, please try again later");
