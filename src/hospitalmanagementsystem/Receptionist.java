@@ -30,17 +30,27 @@ public class Receptionist extends User {
         appointments = new ArrayList<>();
         availableRooms = new ArrayList<>();
     }
-
 public void viewAppointments() {
-    if (appointments.isEmpty()) {
-        System.out.println("No appointments scheduled.");
-    } else {
-        System.out.println("Appointments:");
-        for (Appointment appointment : appointments) {
-            System.out.println(appointment);
+        if (appointments.isEmpty()) {
+            System.out.println("No appointments scheduled.");
+        } else {
+            System.out.println("Appointments:");
+            for (int i = 0; i < appointments.size(); i++) {
+                Appointment appointment = appointments.get(i);
+                Patient patient = appointment.getPatient();
+                Room room = availableRooms.get(i);
+
+                System.out.println("Appointment ID: " + i);
+                System.out.println("Patient ID: " + patient.getID());
+                System.out.println("Patient Name: " + patient.getFirstName() + " " + patient.getLastName());
+                System.out.println("Age: " + patient.getAge());
+                System.out.println("Phone Number: " + patient.getPhoneNumber());
+                System.out.println("Room Number: " + room.getRoomNo());
+                System.out.println("Room Type: " + room.getType());
+                System.out.println("--------------------");
+            }
         }
     }
-}
 
 
 
@@ -100,9 +110,10 @@ public void scheduleAppointment(Patient patient) {
         return;
     }
 
-    Calendar appointmentDate = new GregorianCalendar(year, month, day);
-    Appointment appointment = new Appointment(appointmentDate.getTime(), patient, this, room, procedure);
+Calendar appointmentDate = new GregorianCalendar(year, month, day);
+    Appointment appointment = new Appointment(appointmentDate.getTime(), patient, null, room, procedure);
     appointments.add(appointment);
+
     System.out.println("Appointment scheduled successfully.");
 }
 

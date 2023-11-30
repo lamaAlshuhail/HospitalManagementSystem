@@ -102,7 +102,8 @@ public class HospitalManagementSystem {
 
     System.out.print("Enter phone number: ");
     String phoneNumber = scanner.nextLine();
-
+    
+    
     System.out.print("Enter password: ");
     String password = scanner.nextLine();
     
@@ -262,7 +263,7 @@ public static void receptionistMenu(User user, AuthenticationManager authManager
             String patientID = scanner.next();
             if(authManager.userLookUp(patientID)){
                Patient patientApp = patientInfo(scanner, patientID);
-               user.scheduleAppointment(patientApp);
+               ((Receptionist)user).scheduleAppointment(patientApp);
             }else {
                 displayErrorMessage("ID doesn't exist");
             }
@@ -359,9 +360,10 @@ public static void patientMenu() {
     String notes = scanner.nextLine();
     //solve it later
     }
-    public static Patient patientInfo(Scanner scanner, String ID){
-        scanner.nextLine();
-   System.out.print("Enter first name: ");
+   public static Patient patientInfo(Scanner scanner, String ID) {
+    scanner.nextLine();
+
+    System.out.print("Enter first name: ");
     String firstName = scanner.nextLine();
 
     System.out.print("Enter last name: ");
@@ -376,8 +378,9 @@ public static void patientMenu() {
 
     System.out.print("Enter phone number: ");
     String phoneNumber = scanner.nextLine();
-    return new Patient(firstName, lastName, ID, age, gender,phoneNumber);
-    }
+
+    return new Patient(firstName, lastName, ID, age, gender, phoneNumber);
+}
 }
 
 
