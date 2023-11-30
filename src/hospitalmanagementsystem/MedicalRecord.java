@@ -44,9 +44,18 @@ public class MedicalRecord extends Document {
  this.procedure=procedure;
  }
   
-  public void printMedicalRecord(Doctor doctor, Medicine medicine){
-  //code to print medicalrecored
-  }
+public void printMedicalRecord(Doctor doctor, Medicine medicine) {
+    System.out.println("Medical Record:");
+    System.out.println("Document ID: " + getDocumentId());
+    System.out.println("Creation Date: " + getCreationDate());
+    System.out.println("Procedure: " + procedure.getName());
+//    System.out.println("Doctor: " + doctor.getName());
+//    System.out.println("Medicine: " + medicine.getName());
+    System.out.println("Medical Notes:");
+    for (String note : medicalNotes) {
+        System.out.println("- " + note);
+    }
+}
   
 }
 

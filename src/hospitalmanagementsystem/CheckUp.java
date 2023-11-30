@@ -8,6 +8,7 @@ public class CheckUp extends Procedure {
 
     public CheckUp(String code, String name, long duration, Date scheduledDate, Room checkupLocation, Doctor checkupDoctor) {
         super(code, name, duration);
+        setScheduledDate(scheduledDate);
         this.checkupLocation = checkupLocation;
         this.checkupDoctor = checkupDoctor;
     }
@@ -26,5 +27,17 @@ public class CheckUp extends Procedure {
 
     public void setCheckupDoctor(Doctor doctor) {
         this.checkupDoctor = doctor;
+    }
+
+    @Override
+    public void scheduledTest(Date date, Date time) {
+        setScheduledDate(date);
+        setScheduledTime(time);
+        System.out.println("Scheduled Check-Up:\nDate: " + getScheduledDate() + "\nTime: " + getScheduledTime());
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "\nLocation: " + checkupLocation + "\nDoctor: " + checkupDoctor;
     }
 }

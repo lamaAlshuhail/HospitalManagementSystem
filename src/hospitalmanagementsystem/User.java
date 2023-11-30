@@ -38,7 +38,20 @@ public class User {
         this.password=password;
         this.type=type;
     }
-   
+       public User(String firstName, String lastName, String ID, int age, char gender, String phoneNumber){
+           this.firstName = firstName;
+    this.lastName = lastName;
+    this.ID = ID;
+    this.age = age;
+    this.gender = gender;
+    this.phoneNumber = phoneNumber;
+       
+       }
+       
+       public User(String ID){
+           this.ID=ID;
+       }
+
 //        public User(String firstName, String lastName, String ID, int age, char gender, String phoneNumber, String password){
 //            this.firstName = firstName;
 //    this.lastName = lastName;
@@ -163,6 +176,10 @@ if (verifyPassword(password)) {
         System.out.println("║ - At least one digit                       ║");
         System.out.println("║ - At least one special character           ║");
         System.out.println("╚═══════════════════════════════════════════╝");
+    }
+
+    void scheduleAppointment(Patient patientApp) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     

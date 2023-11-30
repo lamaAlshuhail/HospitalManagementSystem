@@ -18,6 +18,9 @@ public class Doctor extends User {
     public Doctor(String ID, String password, String type){
         super(ID, password, type);
     }
+    public Doctor(String ID){
+        super(ID);
+    }
     
     public String getSpeciality() {
         return speciality;
@@ -29,6 +32,8 @@ public class Doctor extends User {
     
     public void prescribeMedicine(Medicine medicine, Patient patient) {
         // Code to prescribe medicine to a patient
+        
+        
     }
     
     public List<Medicine> showPrescribedMedicine(Patient patient) {
@@ -38,7 +43,9 @@ public class Doctor extends User {
     
     public List<MedicalRecord> viewPatientRecord(Patient patient) {
         // Code to retrieve and return the list of medical records for a patient
+        
         return new ArrayList<MedicalRecord>();
+        
     }
     
     public void writeMedicalNotes(MedicalRecord medicalRecord) {
@@ -49,3 +56,4 @@ public class Doctor extends User {
         // Code to add a medical record to a patient's records
     }
 }
+

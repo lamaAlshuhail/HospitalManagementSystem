@@ -19,6 +19,10 @@ public class Appointment {
     private Procedure procedure;
 
     public Appointment() {
+//        this(date, patient, date, room, procedure);
+    }
+
+    public Appointment(Date date1, Patient patient1, Receptionist aThis, Room room1, Procedure procedure1) {
     }
 
     public Appointment(int appointmentId, Date date, Patient patient, Doctor doctor, Room room, Procedure procedure) {
@@ -77,21 +81,21 @@ public class Appointment {
     public void setProcedure(Procedure procedure) {
         this.procedure = procedure;
     }
-
-    // Method to schedule a new appointment
-    public void scheduleAppointment(Patient patient, Date date, Procedure procedure, Room room) {
-        
-    }
-
-    // Method to cancel an appointment
-    public void cancelAppointment(int appointmentId) {
-        // code :)
-    }
-
-    // Method to reschedule an appointment
-    public void rescheduleAppointment(int appointmentId, Date newDate, Room newRoom) {
-        // code :)
-    }
+//
+//    // Method to schedule a new appointment
+//    public void scheduleAppointment(Patient patient, Date date, Procedure procedure, Room room) {
+//        
+//    }
+//
+//    // Method to cancel an appointment
+//    public void cancelAppointment(int appointmentId) {
+//        // code :)
+//    }
+//
+//    // Method to reschedule an appointment
+//    public void rescheduleAppointment(int appointmentId, Date newDate, Room newRoom) {
+//        // code :)
+//    }
 
     // Override toString method to provide a meaningful string representation of the appointment
     @Override

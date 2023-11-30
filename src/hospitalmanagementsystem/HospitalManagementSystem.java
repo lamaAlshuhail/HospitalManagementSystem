@@ -59,19 +59,11 @@ public class HospitalManagementSystem {
                     doctorMenu();
                     break;
                 case "Receptionist":
-                    
+                    user = new Receptionist(user.getID(), user.getPassword(), user.getType(), authManager);
+                    receptionistMenu(user, authManager);
                     break;   
             }
-//            if (userType.equals("Admin")) {
-//                user = new Admin(userID, userPass, "Admin");
-//                System.out.println(showWelcomeMessage(user));
-//                adminStartPage();
-//            } else if (userType.equals("Receptionist")) {
-//                receptionistStartPage();
-//            }
-//        } else {
-//            System.out.println("User not found.");
-//        }
+
     } else {
         System.out.println("Log in failed.");
     }
@@ -144,10 +136,10 @@ public class HospitalManagementSystem {
     }
 
 
-    private static void receptionistStartPage() {
-        System.out.println("\n\t1. View Appointment\n\t2. Schedule Appointments\n\t3. Check Available Rooms");
-    }
-    
+//    private static void receptionistStartPage() {
+//        System.out.println("\n\t1. View Appointment\n\t2. Schedule Appointments\n\t3. Check Available Rooms");
+//    }
+//    
     public static void adminMenu(User user, AuthenticationManager authManager, ArrayList<User> sysUsers) {
     displayHeader("Admin Menu");
     System.out.println("\t1. Add User");
@@ -248,7 +240,8 @@ public static void displaySuccessMessage(String message) {
     System.out.println("[SUCCESS] " + message);
 }
 
-public static void receptionistMenu() {
+public static void receptionistMenu(User user, AuthenticationManager authManager) {
+
     displayHeader("Receptionist Menu");
     System.out.println("\t1. View Appointments");
     System.out.println("\t2. Schedule Appointment");
@@ -261,14 +254,23 @@ public static void receptionistMenu() {
 
     switch (choice) {
         case 1:
-            
-            break;
+            ((Receptionist)user).viewAppointments();
+            receptionistMenu(user, authManager);
         case 2:
+            authManager.showPatients();
+            System.out.print("Enter the ID of the patient: ");
+            String patientID = scanner.next();
+            if(authManager.userLookUp(patientID)){
+               Patient patientApp = patientInfo(scanner, patientID);
+               user.scheduleAppointment(patientApp);
+            }else {
+                displayErrorMessage("ID doesn't exist");
+            }
             
-            break;
+            receptionistMenu(user, authManager);
         case 3:
-            
-            break;
+            ((Receptionist)user).checkAvailableRooms();
+           receptionistMenu(user, authManager);
         case 4:
             displaySuccessMessage("Logging out.");
             break;
@@ -356,6 +358,25 @@ public static void patientMenu() {
     System.out.print("Enter Diagnosis: ");
     String notes = scanner.nextLine();
     //solve it later
+    }
+    public static Patient patientInfo(Scanner scanner, String ID){
+        scanner.nextLine();
+   System.out.print("Enter first name: ");
+    String firstName = scanner.nextLine();
+
+    System.out.print("Enter last name: ");
+    String lastName = scanner.nextLine();
+
+    System.out.print("Enter age: ");
+    int age = scanner.nextInt();
+    scanner.nextLine(); // Consume the newline character
+
+    System.out.print("Enter gender (M/F): ");
+    char gender = scanner.nextLine().charAt(0);
+
+    System.out.print("Enter phone number: ");
+    String phoneNumber = scanner.nextLine();
+    return new Patient(firstName, lastName, ID, age, gender,phoneNumber);
     }
 }
 

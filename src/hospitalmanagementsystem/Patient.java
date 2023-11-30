@@ -7,11 +7,15 @@ import java.util.List;
 public class Patient extends User {
     private List<MedicalRecord> medicalRecord;
 
-    public Patient() {
+//    public Patient() {
+//        this(firstName, lastName, ID, age, gender, phoneNumber);
+//    }
+
+    public Patient(String firstName, String lastName, String ID, int age, char gender, String phoneNumber) {
         super();
         medicalRecord = new ArrayList<>();
     }
-    
+  
     public Patient(List<MedicalRecord> medicalRecord, String firstName, String lastName, String ID, int age, char gender, String phoneNumber, String password, String type) {
         super(firstName, lastName, ID, age, gender, phoneNumber, password, type);
         this.medicalRecord = medicalRecord;
