@@ -63,13 +63,13 @@ public class Room {
             AVAILABLE_ROOMS.add(suite);
         }
 
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 6; i <= 10; i++) {
             int roomNumber = i;
             Room single = new Room(roomNumber, Room.RoomType.SINGLE);
             AVAILABLE_ROOMS.add(single);
         }
 
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 11; i <= 15; i++) {
             int roomNumber = i;
             Room shared = new Room(roomNumber, Room.RoomType.SHARED);
             AVAILABLE_ROOMS.add(shared);

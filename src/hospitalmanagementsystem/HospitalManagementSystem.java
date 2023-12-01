@@ -256,8 +256,6 @@ public static void receptionistMenu(User user, AuthenticationManager authManager
 
     switch (choice) {
         case 1:
-           ((Receptionist)user).loadAppointmentsFromFile("appointments.txt");
-
             ((Receptionist)user).viewAppointments();
             receptionistMenu(user, authManager);
         case 2:

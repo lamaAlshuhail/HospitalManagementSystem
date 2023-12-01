@@ -30,12 +30,16 @@ public class Receptionist extends User {
         appointments = new ArrayList<>();
         availableRooms = new ArrayList<>();
         this.authManager = authManager;
+        checkAvailableRooms();
+        loadAppointmentsFromFile("appointments.txt");
     }
 
     public Receptionist(String firstName, String lastName, String ID, int age, char gender, String phoneNumber, String password, String type) {
         super(firstName, lastName, ID, age, gender, phoneNumber, password, type);
         appointments = new ArrayList<>();
         availableRooms = new ArrayList<>();
+        checkAvailableRooms();
+        loadAppointmentsFromFile("appointments.txt");
     }
 public void viewAppointments() {
     
@@ -46,7 +50,7 @@ public void viewAppointments() {
         for (int i = 0; i < appointments.size(); i++) {
             Appointment appointment = appointments.get(i);
             Patient patient = appointment.getPatient();
-            Room room = availableRooms.get(i);
+            Room room = availableRooms.get(appointment.getRoom().getRoomNo());
 
             System.out.println("Appointment ID: " + i);
             System.out.println("Patient ID: " + patient.getID());
@@ -109,9 +113,11 @@ public void scheduleAppointment(Patient patient) {
         }
     }
 
-    List<Room> availableRooms = checkAvailableRooms();
   
-
+    for (int i = 0; i < availableRooms.size(); i++) {
+        Room room = availableRooms.get(i);
+        System.out.println((i + 1) + ". Room Number: " + room.getRoomNo() + ", Type: " + room.getType());
+    }
     System.out.println("Enter the room number for the appointment: ");
     int roomChoice = scanner.nextInt();
     scanner.nextLine(); // Consume the newline character
@@ -139,13 +145,6 @@ Calendar appointmentDate = new GregorianCalendar(year, month, day);
 public List<Room> checkAvailableRooms() {
     availableRooms.clear(); // Clear the previous list of available rooms
     availableRooms.addAll(Room.getAvailableRooms()); // Update with the current list of available rooms
-
-    System.out.println("Available Rooms:");
-    for (int i = 0; i < availableRooms.size(); i++) {
-        Room room = availableRooms.get(i);
-        System.out.println((i + 1) + ". Room Number: " + room.getRoomNo() + ", Type: " + room.getType());
-    }
-
     return availableRooms;
 }
 
@@ -234,7 +233,7 @@ public Room selectRoom(int roomIndex) {
             writer.newLine();
         }
 
-        writer.flush(); // Flush the buffer to ensure data is written to the file
+        writer.close(); // Flush the buffer to ensure data is written to the file
         System.out.println("Appointments saved to file: " + fileName);
     } catch (IOException e) {
         System.out.println("An error occurred while saving appointments to file: " + e.getMessage());
@@ -262,13 +261,13 @@ private String getAdditionalInfo(Procedure procedure) {
     try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
         String line;
         while ((line = reader.readLine()) != null) {
-            System.out.println("Parsing line: " + line);
+//            System.out.println("Parsing line: " + line);
             Appointment appointment = parseAppointment(line);
             if (appointment != null) {
                 appointments.add(appointment);
             }
         }
-        System.out.println("Appointments loaded from file: " + fileName);
+//        System.out.println("Appointments loaded from file: " + fileName);
     } catch (IOException e) {
         System.out.println("An error occurred while loading appointments from file: " + e.getMessage());
     }
