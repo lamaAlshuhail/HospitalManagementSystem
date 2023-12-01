@@ -48,6 +48,15 @@ public class User {
        
        }
        
+     public User(String firstName, String lastName, String ID, int age, String phoneNumber){
+     this.firstName = firstName;
+    this.lastName = lastName;
+    this.ID = ID;
+    this.age = age;
+    this.phoneNumber = phoneNumber;
+       
+       }  
+       
        public User(String ID){
            this.ID=ID;
        }

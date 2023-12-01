@@ -22,7 +22,11 @@ public class Appointment {
 //        this(date, patient, date, room, procedure);
     }
 
-    public Appointment(Date date1, Patient patient1, Receptionist aThis, Room room1, Procedure procedure1) {
+    public Appointment(Date date1, Patient patient1, Room room1, Procedure procedure1) {
+        this.date=date1;
+        this.patient=patient1;
+        this.room=room1;
+        this.procedure=procedure1;
     }
 
     public Appointment(int appointmentId, Date date, Patient patient, Doctor doctor, Room room, Procedure procedure) {

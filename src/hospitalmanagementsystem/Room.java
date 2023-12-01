@@ -12,6 +12,8 @@ public class Room {
     private RoomType type;
     private boolean occupied;
 
+
+
     public Room(int roomNo, RoomType type, boolean occupied) {
         this.roomNo = roomNo;
         this.type = type;

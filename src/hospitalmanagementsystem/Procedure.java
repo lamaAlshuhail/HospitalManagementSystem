@@ -17,7 +17,10 @@ public abstract class Procedure {
         this.name = name;
         this.duration = duration;
     }
-
+    public Procedure(String code, String name) {
+        this.code = code;
+        this.name = name;
+    }
     public String getCode() {
         return code;
     }

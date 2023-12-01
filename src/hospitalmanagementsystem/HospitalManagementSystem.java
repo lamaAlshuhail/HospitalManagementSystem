@@ -4,6 +4,7 @@
  */
 package hospitalmanagementsystem;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 /**
@@ -22,7 +23,7 @@ public class HospitalManagementSystem {
         int choice = scanner.nextInt();
         scanner.nextLine();
         ArrayList<User> sysUsers = new ArrayList<>(authManager.loadUsersFromFile());
-
+        String appointmentsFile="appointments.txt";
         User user= null;
   if (choice == 1) {
     user = getUserDetails(scanner);
@@ -176,9 +177,9 @@ public class HospitalManagementSystem {
 
             if (userToUpdate != null) {
                 if (user instanceof Admin) {
-                    ((Admin) user).updateUser(userToUpdate, scanner, authManager);
+                    ((Admin) user).updateUser(userToUpdate, scanner, authManager,sysUsers);
                     authManager.saveUsers();
-                    displaySuccessMessage("User updated successfully.");
+//                    displaySuccessMessage("User updated successfully.");
                 } else {
                     displayErrorMessage("Cannot update user.");
                 }
@@ -255,6 +256,8 @@ public static void receptionistMenu(User user, AuthenticationManager authManager
 
     switch (choice) {
         case 1:
+           ((Receptionist)user).loadAppointmentsFromFile("appointments.txt");
+
             ((Receptionist)user).viewAppointments();
             receptionistMenu(user, authManager);
         case 2:
@@ -264,6 +267,7 @@ public static void receptionistMenu(User user, AuthenticationManager authManager
             if(authManager.userLookUp(patientID)){
                Patient patientApp = patientInfo(scanner, patientID);
                ((Receptionist)user).scheduleAppointment(patientApp);
+               ((Receptionist)user).saveAppointmentsToFile("appointments.txt");
             }else {
                 displayErrorMessage("ID doesn't exist");
             }
@@ -272,9 +276,10 @@ public static void receptionistMenu(User user, AuthenticationManager authManager
         case 3:
             ((Receptionist)user).checkAvailableRooms();
            receptionistMenu(user, authManager);
+           
         case 4:
             displaySuccessMessage("Logging out.");
-            break;
+            System.exit(0);
         default:
             displayErrorMessage("Invalid input.");
            
@@ -339,7 +344,15 @@ public static void patientMenu() {
             
             break;
         case 4:
-            break;
+//        System.out.println("Enter Appointment ID to modify: ");
+//        int appointmentId = scanner.nextInt();
+//        Appointment appointmentToModify = findAppointmentById(appointmentId); if (appointmentToModify != null) {
+//        System.out.println("Enter new date for appointment (yyyy-mm-dd): "); String newDateString = scanner.next();
+//        Date newDate = parseDate(newDateString); modifyMyAppointment(appointmentToModify, newDate);
+//        } else {
+//        System.out.println("No appointment found with ID: " + appointmentId);
+//        } break;
+
         case 5: 
             displaySuccessMessage("Logging out.");
             break;

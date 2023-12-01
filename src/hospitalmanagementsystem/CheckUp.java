@@ -13,6 +13,12 @@ public class CheckUp extends Procedure {
         this.checkupDoctor = checkupDoctor;
     }
 
+    CheckUp(Date appointmentDate, String procedureCode, String procedureName) {
+        super(procedureName, procedureCode);
+          setScheduledDate(appointmentDate);
+
+    }
+
     public Room getCheckupLocation() {
         return checkupLocation;
     }

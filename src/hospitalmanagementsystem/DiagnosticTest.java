@@ -12,6 +12,10 @@ public class DiagnosticTest extends Procedure {
         this.testStatus = testStatus;
     }
 
+    DiagnosticTest(String procedureCode, String procedureName) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public String getResult() {
         return result;
     }

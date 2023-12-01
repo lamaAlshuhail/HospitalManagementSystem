@@ -57,7 +57,7 @@ public void deleteUser(String ID, ArrayList<User> sysUsers) {
     }
 }
 
-    public void updateUser(User user, Scanner scanner, AuthenticationManager authManager) {
+    public void updateUser(User user, Scanner scanner, AuthenticationManager authManager, ArrayList<User> sysUsers) {
     System.out.println("Which field would you like to update: ");
     System.out.println("\t1. First Name\n\t2. Last Name\n\t3. ID\n\t4. Age\n\t5. Phone Number\n\t6. Password\n");
     System.out.print("Field Numbers (You can choose more than one, separate by spaces): ");
@@ -69,21 +69,20 @@ public void deleteUser(String ID, ArrayList<User> sysUsers) {
 
             for (String choice : choiceArr) {
                 int fieldNumber = Integer.parseInt(choice);
-                updateUserField(user, fieldNumber, scanner, authManager);
+                updateUserField(user, fieldNumber, scanner, authManager,sysUsers);
             }
         } else {
             int choice = Integer.parseInt(choices);
-            updateUserField(user, choice, scanner, authManager);
+            updateUserField(user, choice, scanner, authManager,sysUsers);
         }
 
-        System.out.println("User updated successfully.");
     } else {
         System.out.println("No fields selected for update.");
     }
 }
 
 
-    private void updateUserField(User user, int fieldNumber, Scanner scanner, AuthenticationManager authManager) {
+    private void updateUserField(User user, int fieldNumber, Scanner scanner, AuthenticationManager authManager, ArrayList<User> users) {
         switch (fieldNumber) {
             case 1:
                 System.out.print("Enter the new first name: ");
@@ -100,7 +99,7 @@ public void deleteUser(String ID, ArrayList<User> sysUsers) {
             String newID = scanner.nextLine();
 
             boolean idExists = false;
-            for (User u : userList) {
+            for (User u : users) {
                 if (!u.equals(user) && u.getID().equals(newID)) {
                     idExists = true;
                     // No break statement here
