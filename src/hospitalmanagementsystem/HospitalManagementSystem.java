@@ -60,7 +60,7 @@ public class HospitalManagementSystem {
                         break;
                     case "Doctor":
                         user = new Doctor(user.getID(), user.getPassword(),user.getType());
-                        doctorMenu();
+                        doctorMenu(user, authManager);
                         break;
                     case "Receptionist":
                         user = new Receptionist(user.getID(), user.getPassword(), user.getType(), authManager);
@@ -321,7 +321,7 @@ public class HospitalManagementSystem {
                 break;
         }
     }
-    public static void doctorMenu() {
+    public static void doctorMenu(User user,AuthenticationManager authManager) {
         displayHeader("Doctor Menu");
         System.out.println("\t1. Prescribe Medicine");
         System.out.println("\t2. Add Medical Record");
@@ -333,18 +333,30 @@ public class HospitalManagementSystem {
         Scanner scanner = new Scanner(System.in);
         int choice = scanner.nextInt();
         scanner.nextLine();
-
+        Patient patient;
         switch (choice) {
             case 1:
-
-                break;
+                authManager.showPatients();
+                System.out.print("Enter the ID of the patient: ");
+                String patientID = scanner.next();
+                patient = patientInfo(scanner, patientID);
+                ((Doctor)user).prescribeMedicine(patient);
+                doctorMenu(user,authManager);
             case 2:
+                MedicalRecord record = medicalRecordInfo(scanner, authManager);
+                ((Doctor)user).addMedicalRecord(record);
+                displaySuccessMessage("Medical Record added.");
+                doctorMenu(user,authManager);
 
-                break;
             case 3:
-
-                break;
+                ((Doctor)user).viewMedicalRecords();
+                doctorMenu(user,authManager);
             case 4:
+                authManager.showPatients();
+                System.out.print("Enter the ID of the patient: ");
+                String tempID = scanner.next();
+                ((Doctor)user).showPrescribedMedicine(tempID, authManager);
+                doctorMenu(user,authManager);
                 break;
             case 5:
                 displaySuccessMessage("Logging out.");
@@ -367,20 +379,23 @@ public class HospitalManagementSystem {
         scanner.nextLine();
         switch (choice) {
             case 1:
-                ((Patient)user).viewMedicalRecord();
+                defaultValuesForPatientMedicalRecord();
                 patientMenu(user, authManager);
 
             case 2:
+                                scanner.nextLine();
+
                 tempRecep.viewAppointments(user.getID());
+
                 patientMenu(user, authManager);
                 break;
 
             case 3:
+
                 displaySuccessMessage("Logging out.");
                 break;
             default:
                 displayErrorMessage("Invalid input.");
-
                 break;
         }
     }
@@ -422,7 +437,160 @@ public class HospitalManagementSystem {
     private static boolean isValidPhoneNumber(String phoneNumber) {
     return phoneNumber.matches("05\\d{8}") && phoneNumber.length() == 10;
 }
+    
+  public static MedicalRecord medicalRecordInfo(Scanner scanner, AuthenticationManager authManager) {
+    System.out.println("Enter the document ID:");
+    String documentId = scanner.next();
+
+    Procedure procedure = getProcedure(scanner);
+    String patientId;
+
+    do {
+        authManager.showPatients();
+        System.out.println("Pick a Patient: ");
+        patientId = scanner.next();
+    } while (!authManager.userLookUp(patientId));
+
+    scanner.nextLine(); // Consume the newline character
+
+    System.out.println("Medical Notes");
+    String notes = scanner.nextLine();
+    return new MedicalRecord(documentId, procedure, notes);
 }
+
+public static Procedure getProcedure(Scanner scanner) {
+    
+    System.out.println("Enter the procedure code: ");
+    String code = scanner.next();
+
+    System.out.println("Enter the procedure name: ");
+    String name = scanner.next();
+
+    // Prompt the user for the specific procedure type
+    System.out.println("Select the procedure type:");
+    System.out.println("1. CheckUp");
+    System.out.println("2. DiagnosticTest");
+    int typeChoice = scanner.nextInt();
+    scanner.nextLine(); // Consume the newline character
+
+    Procedure procedure = null;
+
+    if (typeChoice == 1) {
+        procedure = new CheckUp(code, name);
+    } else if (typeChoice == 2) {
+        procedure = new DiagnosticTest(code, name);
+    }
+
+    return procedure;
+}
+
+
+public static void defaultValuesForPatientMedicalRecord(){
+    System.out.println("Document ID: " + "e0c4d22f-6d5e-4a15-226b-40b1d7c5g8g7");
+    System.out.println("Procedure Name: " + "Diagnostic Test");
+    System.out.println("Procedure Code: " + "08DD00FX");
+    System.out.println("Medical Notes: " + "S: Subjective\n" +
+"The patient presents with complaints\n" +
+"of persistent cough, shortness of\n" +
+"breath, and wheezing for the past\n" +
+"week.\n" +
+"\n" +
+"O: Objective\n" +
+"- Vital signs: BP 120/80 mmHg, HR\n" +
+"82 bpm, RR 20 breaths per minute,\n" +
+"O2 saturation 95% on room air.\n" +
+"- Auscultation reveals bilateral\n" +
+"expiratory wheezes.\n" +
+"- Chest X-ray shows no signs of\n" +
+"consolidation or infiltrates.\n" +
+"\n" +
+"A: Assessment\n" +
+"1. Acute exacerbation of asthma:\n" +
+"   - Persistent cough, shortness of\n" +
+"   breath, wheezing.\n" +
+"   - Bilateral expiratory wheezes.\n" +
+"2. Rule out respiratory infection:\n" +
+"   - No signs of consolidation or\n" +
+"   infiltrates on chest X-ray.\n" +
+"\n" +
+"P: Plan\n" +
+"1. Prescribe albuterol inhaler, 2\n" +
+"puffs every 4-6 hours as needed for\n" +
+"wheezing and shortness of breath.\n" +
+"2. Advise patient to rest, drink\n" +
+"fluids, avoid triggers.\n" +
+"3. Schedule follow-up in 1 week to\n" +
+"monitor progress.");
+    
+    System.out.println("-----------------------------------");
+    System.out.println("Medical Record:");
+    System.out.println("Document ID: " +  "e0c4d96f-6d5e-4a45-916b-40b1d7c5e8d7");
+    System.out.println("Procedure Name: " + "Diagnostic Test");
+    System.out.println("Procedure Code: " + "7K9V4W");
+    System.out.println("Medical Notes: "+"S: Subjective\n" +
+"Patient reports fatigue, weakness,\n" +
+"and headaches. Shortness of breath\n" +
+"with exertion. Symptoms for weeks.\n" +
+"\n" +
+"O: Objective\n" +
+"- Vital signs: BP 110/70 mmHg, HR\n" +
+"78 bpm, RR 16 breaths per min.\n" +
+"- Pale conjunctiva, mild tachycardia.\n" +
+"- Labs: low Hb (9 g/dL), ferritin\n" +
+"(10 ng/mL).\n" +
+"\n" +
+"A: Assessment\n" +
+"1. Iron deficiency anemia:\n" +
+"   - Fatigue, weakness, headaches.\n" +
+"   - Low Hb (9 g/dL), ferritin (10 ng/mL).\n" +
+"   - Pale conjunctiva, mild tachycardia.\n" +
+"\n" +
+"P: Plan\n" +
+"1. Prescribe oral iron supplements\n" +
+"(ferrous sulfate 325 mg) once daily\n" +
+"on empty stomach.\n" +
+"2. Advise iron-rich foods: red meat,\n" +
+"spinach, legumes.\n" +
+"3. Discuss vit. C-rich foods/supps\n" +
+"for iron absorption enhancement.\n" +
+"4. Schedule follow-up in 4 weeks to\n" +
+"reassess iron levels and treatment.\n" +
+"5. Educate on iron supp side effects\n" +
+"(constipation, dark stool).\n" +
+"6. Provide patient education on iron\n" +
+"deficiency anemia and lifestyle.");
+    System.out.println("-----------------------------------");
+
+    System.out.println("Medical Record:");
+    System.out.println("Document ID: " +  "4d9f3be2-0e79-4e6f-b6ad-3b551058b822");
+    System.out.println("Procedure Name: " + "Check up");
+    System.out.println("Procedure Code: " + "B3G7X5");
+    System.out.println("Medical Notes: "+"S: Subjective\n" +
+"Patient reports no specific\n" +
+"complaints. Denies pain, fever,\n" +
+"fatigue, or other symptoms.\n" +
+"\n" +
+"O: Objective\n" +
+"- Vital signs: BP 120/80 mmHg,\n" +
+"HR 72 bpm, RR 16 breaths per min.\n" +
+"- General appearance: Alert and\n" +
+"oriented. No acute distress.\n" +
+"\n" +
+"A: Assessment\n" +
+"Normal physical examination and\n" +
+"vital signs. No concerning symptoms\n" +
+"reported by the patient.\n" +
+"\n" +
+"P: Plan\n" +
+"No specific treatment required.\n" +
+"Encourage healthy lifestyle,\n" +
+"regular exercise, and balanced\n" +
+"diet. Schedule routine follow-up\n" +
+"in 1 year for preventive care.");
+
+}
+    }
+
 
 
 

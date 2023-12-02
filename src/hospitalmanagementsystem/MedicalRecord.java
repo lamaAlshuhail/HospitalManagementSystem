@@ -22,11 +22,16 @@ public class MedicalRecord extends Document {
 //        medicalNotes = new ArrayList<>();
 //    }
    
-  public MedicalRecord(String documentId,Procedure procedure,List<String> medicalNotes, Date creationDate){
-  super(documentId,creationDate);
+  public MedicalRecord(String documentId,Procedure procedure,String medicalNotes){
+  super(documentId);
   this.procedure=procedure;
   this.medicalNotes=new ArrayList<>();
+  addMedicalNotes(medicalNotes);
   }
+  
+    public void addMedicalNotes(String notes) {
+        medicalNotes.add(notes);
+    }
   
   public List<String> getMedicalNotes(){
   return this.medicalNotes;
@@ -44,10 +49,9 @@ public class MedicalRecord extends Document {
  this.procedure=procedure;
  }
   
-public void printMedicalRecord(Doctor doctor, Medicine medicine) {
+public void printMedicalRecord(Medicine medicine) {
     System.out.println("Medical Record:");
     System.out.println("Document ID: " + getDocumentId());
-    System.out.println("Creation Date: " + getCreationDate());
     System.out.println("Procedure: " + procedure.getName());
 //    System.out.println("Doctor: " + doctor.getName());
 //    System.out.println("Medicine: " + medicine.getName());

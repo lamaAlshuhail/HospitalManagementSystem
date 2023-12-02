@@ -2,9 +2,12 @@ package hospitalmanagementsystem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Doctor extends User {
 //    private String speciality;
+private List<Medicine> prescribedMedicine;
+private List<MedicalRecord> medicalRecord;
 
     public Doctor() {
         super();
@@ -17,9 +20,17 @@ public class Doctor extends User {
     
     public Doctor(String ID, String password, String type){
         super(ID, password, type);
+        prescribedMedicine = new ArrayList<>();
+        medicalRecord= new ArrayList<>();
+
+
     }
     public Doctor(String ID){
         super(ID);
+        prescribedMedicine = new ArrayList<>();
+                medicalRecord= new ArrayList<>();
+
+
     }
     
 //    public String getSpeciality() {
@@ -30,30 +41,72 @@ public class Doctor extends User {
 //        this.speciality = speciality;
 //    }
 //    
-    public void prescribeMedicine(Medicine medicine, Patient patient) {
-        // Code to prescribe medicine to a patient
-        
-        
+public void prescribeMedicine(Patient patient) {
+    Scanner scanner = new Scanner(System.in);
+
+    // Prompt the doctor to enter the medicine details
+    System.out.println("Prescribe Medicine");
+    System.out.print("Enter medicine code: ");
+    String medicineCode = scanner.nextLine();
+
+    System.out.print("Enter medicine name: ");
+    String medicineName = scanner.nextLine();
+
+    System.out.print("Enter dose: ");
+    double dose = scanner.nextDouble();
+
+    System.out.print("Enter quantity: ");
+    int quantity = scanner.nextInt();
+
+    // Create a new Medicine object with the entered details
+    Medicine medicine = new Medicine(medicineCode, medicineName, dose, quantity);
+
+    // Add the prescribed medicine to the patient's list of prescribed medicines
+    prescribedMedicine.add(medicine);
+
+    System.out.println("Medicine prescribed successfully.");
+}
+
+public void showPrescribedMedicine(String patientId, AuthenticationManager authManager) {
+    // Find the patient with the given ID
+    User patient = authManager.getUserByID(patientId);
+
+    // Check if the patient exists
+    if (patient == null) {
+        System.out.println("Patient not found.");
+        return;
     }
+
+
+    // Check if there is any prescribed medicine
+    if (prescribedMedicine.isEmpty()) {
+        System.out.println("No prescribed medicine for this patient.");
+    } else {
+        System.out.println("Prescribed medicine for patient with ID " + patientId + ":");
+        for (Medicine medicine : prescribedMedicine) {
+            System.out.println("- Code: " + medicine.getMedicineCode());
+            System.out.println("  Name: " + medicine.getMedicineName());
+            System.out.println("  Dose: " + medicine.getDose());
+            System.out.println("  Quantity: " + medicine.getQuantity());
+        }
+    }
+}
+
     
-    public List<Medicine> showPrescribedMedicine(Patient patient) {
-        // Code to retrieve and return the list of prescribed medicines for a patient
-        return new ArrayList<Medicine>();
+public void viewMedicalRecords() {
+        for (MedicalRecord record : medicalRecord) {
+            System.out.println("Document ID: " + record.getDocumentId());
+            System.out.println("Procedure Name: " + record.getProcedure().getName());
+            System.out.println("Procedure Code: " + record.getProcedure().getCode());
+            System.out.println("Medical Notes: " + record.getMedicalNotes());
+            System.out.println("-----------------------------------");
+        }
     }
-    
-    public List<MedicalRecord> viewPatientRecord(Patient patient) {
-        // Code to retrieve and return the list of medical records for a patient
+    public void addMedicalRecord(MedicalRecord record) {
         
-        return new ArrayList<MedicalRecord>();
-        
+        medicalRecord.add(record);
     }
+
     
-    public void writeMedicalNotes(MedicalRecord medicalRecord) {
-        // Code to write medical notes to a medical record
-    }
-    
-    public void addMedicalRecord(MedicalRecord record, Patient patient) {
-        // Code to add a medical record to a patient's records
-    }
 }
 

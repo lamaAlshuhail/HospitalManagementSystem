@@ -19,6 +19,11 @@ public class CheckUp extends Procedure {
 
     }
 
+    CheckUp(String procedureCode, String procedureName) {
+        super(procedureName, procedureCode);
+
+    }
+
     public Room getCheckupLocation() {
         return checkupLocation;
     }

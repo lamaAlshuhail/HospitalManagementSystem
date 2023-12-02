@@ -9,3 +9,4 @@ default,default,Receptionist
 2220004583,11223344lL!,Doctor
 2220006300,Lama2003!,Receptionist
 1233214568,LamaShuhail1!,Doctor
+1212121212,11223344lL!,Doctor

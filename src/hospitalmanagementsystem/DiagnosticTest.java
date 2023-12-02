@@ -13,6 +13,10 @@ public class DiagnosticTest extends Procedure {
     }
 
     DiagnosticTest(String procedureCode, String procedureName) {
+        super(procedureCode,procedureName);
+    }
+
+    DiagnosticTest(String code, String name, long duration) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

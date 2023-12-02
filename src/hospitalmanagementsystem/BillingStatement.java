@@ -17,7 +17,7 @@ public class BillingStatement  extends Document {
         private Procedure procedure;
 
     public BillingStatement(String documentId, Date creationDate, Procedure procedure, double totalAmount, double paidAmount, Date dueDate) {
-        super(documentId, creationDate);
+        super(documentId);
         this.totalAmount = totalAmount;
         this.paidAmount = paidAmount;
         this.dueDate = dueDate;
