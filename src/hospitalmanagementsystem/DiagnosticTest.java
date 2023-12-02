@@ -36,11 +36,6 @@ public class DiagnosticTest extends Procedure {
         this.testStatus = testStatus;
     }
 
-    public String cancelTest() {
-        // Add your implementation here
-        return null;
-    }
-
     @Override
     public void scheduledTest(Date date, Date time) {
         setScheduledDate(date);

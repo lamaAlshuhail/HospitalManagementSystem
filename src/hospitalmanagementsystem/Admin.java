@@ -1,41 +1,20 @@
 package hospitalmanagementsystem;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
 public class Admin extends User {
     private List<User> userList;
-    private AuthenticationManager authManager;
-    public Admin() {
-        super();
-        userList = new ArrayList<>();
-    }
-    
-    
-        public Admin(String ID, String password, String type) {
+
+
+    public Admin(String ID, String password, String type) {
         super(ID, password, type);
         userList = new ArrayList<>();
     }
-        
-        public Admin(AuthenticationManager authManager) {
-        this.authManager = authManager;
-    }
-        
-  public void addUser(User newUser) {
-    boolean isDuplicate = userList.stream().anyMatch(user -> user.getID().equals(newUser.getID()));
 
-    if (isDuplicate) {
-        System.out.println("User with the same ID already exists. User not added.");
-    } else {
-        userList.add(newUser);
-        System.out.println("User added successfully.");
-    }
-}
-  
 
-public void deleteUser(String ID, ArrayList<User> sysUsers) {
+    public void deleteUser(String ID, ArrayList<User> sysUsers) {
     boolean found = false;
     int index = -1;
 

@@ -26,7 +26,7 @@ public class Receptionist extends User {
 //    this.authManager = authManager;
 //}
     public Receptionist(String id, String password, String type, AuthenticationManager authManager) {
-        super();
+        super(id, password,type,authManager);
         appointments = new ArrayList<>();
         availableRooms = new ArrayList<>();
         this.authManager = authManager;
@@ -34,13 +34,6 @@ public class Receptionist extends User {
         loadAppointmentsFromFile("appointments.txt");
     }
 
-    public Receptionist(String firstName, String lastName, String ID, int age, char gender, String phoneNumber, String password, String type) {
-        super(firstName, lastName, ID, age, gender, phoneNumber, password, type);
-        appointments = new ArrayList<>();
-        availableRooms = new ArrayList<>();
-        checkAvailableRooms();
-        loadAppointmentsFromFile("appointments.txt");
-    }
     public void viewAppointments() {
 
         if (appointments.isEmpty()) {
@@ -238,16 +231,7 @@ public class Receptionist extends User {
 
         return procedure;
     }
-    public Room selectRoom(int roomIndex) {
-        List<Room> availableRooms = Room.getAvailableRooms();
 
-        if (roomIndex >= 0 && roomIndex < availableRooms.size()) {
-            Room selectedRoom = availableRooms.get(roomIndex);
-            return selectedRoom;
-        } else {
-            return null;
-        }
-    }
     public void saveAppointmentsToFile(String fileName) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");

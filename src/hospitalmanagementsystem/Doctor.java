@@ -9,11 +9,7 @@ public class Doctor extends User {
 private List<Medicine> prescribedMedicine;
 private List<MedicalRecord> medicalRecord;
 
-    public Doctor() {
-        super();
-    }
-    
-//    public Doctor(String speciality, String firstName, String lastName, String ID, int age, char gender, String phoneNumber, String password, String type) {
+    //    public Doctor(String speciality, String firstName, String lastName, String ID, int age, char gender, String phoneNumber, String password, String type) {
 //        super(firstName, lastName, ID, age, gender, phoneNumber, password, type);
 //        this.speciality = speciality;
 //    }

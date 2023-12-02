@@ -16,8 +16,7 @@ private String medicineName;
 private double dose;
 private int quantity;
 
-public Medicine(){}
-public Medicine(String medicineCode, String medicineName, double dose, int quantity){
+    public Medicine(String medicineCode, String medicineName, double dose, int quantity){
  this.medicineCode=medicineCode;
  this.medicineName=medicineName;
  this.dose=dose;

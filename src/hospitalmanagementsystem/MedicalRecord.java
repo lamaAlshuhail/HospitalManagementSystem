@@ -44,12 +44,8 @@ public class MedicalRecord extends Document {
  public Procedure getProcedure(){
  return this.procedure;
  }
- 
-  public void setProcedure(){
- this.procedure=procedure;
- }
-  
-public void printMedicalRecord(Medicine medicine) {
+
+    public void printMedicalRecord(Medicine medicine) {
     System.out.println("Medical Record:");
     System.out.println("Document ID: " + getDocumentId());
     System.out.println("Procedure: " + procedure.getName());

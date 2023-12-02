@@ -8,9 +8,8 @@ package hospitalmanagementsystem;
 import java.util.Date;
 public class Document {
      private String documentId;
-    private Procedure procedure;
 
- 
+
     public Document(String documentId) {
         this.documentId = documentId;
  //  lastModified is set at creation

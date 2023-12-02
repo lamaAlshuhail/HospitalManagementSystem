@@ -29,15 +29,6 @@ public class Appointment {
         this.procedure=procedure1;
     }
 
-    public Appointment(int appointmentId, Date date, Patient patient, Doctor doctor, Room room, Procedure procedure) {
-        this.appointmentId = appointmentId;
-        this.date = date;
-        this.patient = patient;
-        this.doctor = doctor;
-        this.room = room;
-        this.procedure = procedure;
-    }
-
     public int getAppointmentId() {
         return appointmentId;
     }

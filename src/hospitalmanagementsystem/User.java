@@ -60,6 +60,13 @@ public class User {
            this.ID=ID;
        }
 
+    public User(String id, String password, String type, AuthenticationManager authManager) {
+        this.ID=id;
+        this.password=password;
+        this.type=type;
+        AuthenticationManager authM = authManager;
+    }
+
 //        public User(String firstName, String lastName, String ID, int age, char gender, String phoneNumber, String password){
 //            this.firstName = firstName;
 //    this.lastName = lastName;
@@ -126,7 +133,7 @@ public class User {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-    public void setType(String tyoe){
+    public void setType(String type){
         this.type=type;
     }
 
@@ -140,16 +147,7 @@ if (verifyPassword(password)) {
     
     
     
-        public void showInfo() {
-        System.out.println("*******************************************************\n");
-        System.out.println("Name: " + firstName + " " + lastName);
-        System.out.println("ID: " + ID);
-        System.out.println("Age: " + age);
-        System.out.println("Gender: " + gender);
-        System.out.println("Phone Number: " + phoneNumber);
-        System.out.println("*******************************************************\n");
 
-    }
         
     public boolean verifyPassword(String password) {
      

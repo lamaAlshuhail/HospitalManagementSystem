@@ -57,15 +57,6 @@ public class AuthenticationManager {
         return false; // User not found
     }
 
-    public boolean login(String ID, String password) {
-        boolean isAuthenticated = authenticate(ID, password);
-        if (isAuthenticated)
-            System.out.println("Login successful");
-        else
-            System.out.println("Login failed");
-        return isAuthenticated;
-    }
-
     public boolean authenticate(String ID, String password) {
         for (User user : userList) {
             if (user.getID().equals(ID) && user.getPassword().equals(password)) {
