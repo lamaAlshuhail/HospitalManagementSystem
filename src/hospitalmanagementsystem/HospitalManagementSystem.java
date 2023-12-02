@@ -360,7 +360,7 @@ public class HospitalManagementSystem {
                 break;
             case 5:
                 displaySuccessMessage("Logging out.");
-                break;
+                System.exit(0);
             default:
                 displayErrorMessage("Invalid input.");
 
@@ -383,7 +383,6 @@ public class HospitalManagementSystem {
                 patientMenu(user, authManager);
 
             case 2:
-                                scanner.nextLine();
 
                 tempRecep.viewAppointments(user.getID());
 
@@ -393,7 +392,7 @@ public class HospitalManagementSystem {
             case 3:
 
                 displaySuccessMessage("Logging out.");
-                break;
+                System.exit(0);
             default:
                 displayErrorMessage("Invalid input.");
                 break;
