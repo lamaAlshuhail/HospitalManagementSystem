@@ -18,6 +18,7 @@ public class HospitalManagementSystem {
      */
     public static void main(String[] args) {
         Scanner scanner= new Scanner(System.in);
+        String usersFile ="/Users/lamashuhail/NetBeansProjects/HospitalManagementSystem/users.txt";
         AuthenticationManager authManager = new AuthenticationManager("/Users/lamashuhail/NetBeansProjects/HospitalManagementSystem/users.txt");
         signupMenu();
         int choice = scanner.nextInt();
@@ -96,20 +97,53 @@ public class HospitalManagementSystem {
         System.out.print("Enter ID: ");
         String ID = scanner.nextLine();
 
+        while (!isValidID(ID)) {
+            displayErrorMessage("Invalid ID. ID must be a digit and 10 characters long.");
+            System.out.print("Enter ID: ");
+            ID = scanner.nextLine();
+        }
         System.out.print("Enter age: ");
         int age = scanner.nextInt();
         scanner.nextLine(); // Consume the newline character
+        
+        char gender = ' '; // Initialize with a default value
 
-        System.out.print("Enter gender (M/F): ");
-        char gender = scanner.nextLine().charAt(0);
+        while (gender != 'M' && gender != 'F') {
+            System.out.print("Enter gender (M/F): ");
+            String genderInput = scanner.nextLine();
 
+            if (!genderInput.isEmpty()) {
+                gender = Character.toUpperCase(genderInput.charAt(0));
+            } else {
+                System.out.println("Gender cannot be empty. Please try again.");
+            }
+
+            if (gender != 'M' && gender != 'F') {
+                System.out.println("Invalid gender. Please enter 'M' for male or 'F' for female.");
+            }
+        }
+        
         System.out.print("Enter phone number: ");
         String phoneNumber = scanner.nextLine();
 
+        while (!isValidPhoneNumber(phoneNumber)) {
+            displayErrorMessage("Invalid phone number. Phone number must be a digit and start with '05'.");
+            System.out.print("Enter phone number: ");
+            phoneNumber = scanner.nextLine();
+        }
 
-        System.out.print("Enter password: ");
-        String password = scanner.nextLine();
+        String password;
+        User temp = new User();
 
+        do {
+            temp.displayPasswordRequirements();
+            System.out.print("Enter password: ");
+            password = scanner.nextLine();
+
+            if (!temp.verifyPassword(password)) {
+                displayErrorMessage("Invalid password.");
+            }
+        } while (!temp.verifyPassword(password));
         userRoles();
         int role = scanner.nextInt();
         String type=convertSignUpRoleToType(role);
@@ -134,10 +168,10 @@ public class HospitalManagementSystem {
         }
         return type;
     }
-    public static void adminStartPage(){
-        System.out.println("Which operation would you like to do: ");
-        System.out.println("\t1. Add User\n\t2. Update User\n\t3. Delete User\n\t4. Exit");
-    }
+//    public static void adminStartPage(){
+//        System.out.println("Which operation would you like to do: ");
+//        System.out.println("\t1. Add User\n\t2. Update User\n\t3. Delete User\n\t4. Exit");
+//    }
 
 
     //    private static void receptionistStartPage() {
@@ -170,6 +204,7 @@ public class HospitalManagementSystem {
                 adminMenu(user, authManager, sysUsers);
                 break;
             case 2:
+                
                 showUsers(sysUsers);
                 System.out.print("Enter the ID of the user to update: ");
                 String idToBeUpdated = scanner.next();
@@ -380,6 +415,13 @@ public class HospitalManagementSystem {
 
         return new Patient(firstName, lastName, ID, age, gender, phoneNumber);
     }
+    private static boolean isValidID(String ID) {
+    return ID.matches("\\d{10}");
+}
+    
+    private static boolean isValidPhoneNumber(String phoneNumber) {
+    return phoneNumber.matches("05\\d{8}") && phoneNumber.length() == 10;
+}
 }
 
 

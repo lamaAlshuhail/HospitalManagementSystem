@@ -247,7 +247,8 @@ public class Receptionist extends User {
         } else {
             return null;
         }
-    }public void saveAppointmentsToFile(String fileName) {
+    }
+    public void saveAppointmentsToFile(String fileName) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
@@ -295,23 +296,24 @@ public class Receptionist extends User {
     public String toString() {
         return "Receptionist{" + "appointments=" + appointments + '}';
     }
+    
     public void loadAppointmentsFromFile(String fileName) {
         appointments.clear(); // Clear existing appointments
 
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
             while ((line = reader.readLine()) != null) {
-//            System.out.println("Parsing line: " + line);
                 Appointment appointment = parseAppointment(line);
                 if (appointment != null) {
                     appointments.add(appointment);
                 }
             }
-//        System.out.println("Appointments loaded from file: " + fileName);
         } catch (IOException e) {
             System.out.println("An error occurred while loading appointments from file: " + e.getMessage());
         }
     }
+    
+    
     public Appointment parseAppointment(String line) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
