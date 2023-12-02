@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Doctor extends User {
-    private String speciality;
+//    private String speciality;
 
     public Doctor() {
         super();
     }
     
-    public Doctor(String speciality, String firstName, String lastName, String ID, int age, char gender, String phoneNumber, String password, String type) {
-        super(firstName, lastName, ID, age, gender, phoneNumber, password, type);
-        this.speciality = speciality;
-    }
+//    public Doctor(String speciality, String firstName, String lastName, String ID, int age, char gender, String phoneNumber, String password, String type) {
+//        super(firstName, lastName, ID, age, gender, phoneNumber, password, type);
+//        this.speciality = speciality;
+//    }
     
     public Doctor(String ID, String password, String type){
         super(ID, password, type);
@@ -22,14 +22,14 @@ public class Doctor extends User {
         super(ID);
     }
     
-    public String getSpeciality() {
-        return speciality;
-    }
-    
-    public void setSpeciality(String speciality) {
-        this.speciality = speciality;
-    }
-    
+//    public String getSpeciality() {
+//        return speciality;
+//    }
+//    
+//    public void setSpeciality(String speciality) {
+//        this.speciality = speciality;
+//    }
+//    
     public void prescribeMedicine(Medicine medicine, Patient patient) {
         // Code to prescribe medicine to a patient
         

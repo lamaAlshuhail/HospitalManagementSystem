@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>/Users/lamashuhail/NetBeansProjects/HospitalManagementSystem</OriginalElement>
+  <nodes>
+    <node x="1925.796511627907" y="731.0">hospitalmanagementsystem.Receptionist</node>
+    <node x="1049.997093023256" y="-14.0">hospitalmanagementsystem.User</node>
+    <node x="1945.7470930232557" y="1716.0">hospitalmanagementsystem.MedicalRecord</node>
+    <node x="504.9941860465117" y="1212.0">hospitalmanagementsystem.Appointment</node>
+    <node x="668.0" y="1997.0">hospitalmanagementsystem.AppointmentUtility</node>
+    <node x="124.99418604651169" y="1308.0">hospitalmanagementsystem.CheckUp</node>
+    <node x="1812.75" y="1321.0">hospitalmanagementsystem.Document</node>
+    <node x="-136.0" y="1997.0">hospitalmanagementsystem.HospitalManagementSystem</node>
+    <node x="1505.747093023256" y="1693.0">hospitalmanagementsystem.BillingStatement</node>
+    <node x="353.0" y="1997.0">hospitalmanagementsystem.Medicine</node>
+    <node x="-136.0" y="753.0">hospitalmanagementsystem.Room</node>
+    <node x="1990.296511627907" y="132.0">hospitalmanagementsystem.AuthenticationManager</node>
+    <node x="1650.796511627907" y="705.0">hospitalmanagementsystem.Procedure</node>
+    <node x="1332.247093023256" y="1296.0">hospitalmanagementsystem.DiagnosticTest</node>
+    <node x="269.0697674418607" y="791.0">hospitalmanagementsystem.Doctor</node>
+    <node x="690.0000000000001" y="791.0">hospitalmanagementsystem.Patient</node>
+    <node x="1199.796511627907" y="803.0">hospitalmanagementsystem.Admin</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="hospitalmanagementsystem.MedicalRecord" target="hospitalmanagementsystem.Document" relationship="GENERALIZATION">
+      <point x="-95.25" y="-106.5" />
+      <point x="2040.9970930232557" y="1667.0" />
+      <point x="1911.75" y="1667.0" />
+      <point x="0.0" y="105.5" />
+    </edge>
+    <edge source="hospitalmanagementsystem.Document" target="hospitalmanagementsystem.Procedure" relationship="TO_ONE">
+      <point x="0.0" y="-105.5" />
+      <point x="1911.75" y="1191.0" />
+      <point x="1875.546511627907" y="1191.0" />
+      <point x="1875.546511627907" y="1171.0" />
+      <point x="1842.046511627907" y="1171.0" />
+      <point x="63.75" y="202.5" />
+    </edge>
+    <edge source="hospitalmanagementsystem.Appointment" target="hospitalmanagementsystem.Doctor" relationship="TO_ONE">
+      <point x="0.0" y="-214.5" />
+      <point x="707.4941860465117" y="1191.0" />
+      <point x="600.5465116279071" y="1191.0" />
+      <point x="600.5465116279071" y="1131.0" />
+      <point x="452.0697674418607" y="1131.0" />
+      <point x="0.0" y="116.5" />
+    </edge>
+    <edge source="hospitalmanagementsystem.CheckUp" target="hospitalmanagementsystem.Doctor" relationship="TO_ONE">
+      <point x="-90.0" y="-118.5" />
+      <point x="214.9941860465117" y="1191.0" />
+      <point x="157.04651162790697" y="1191.0" />
+      <point x="157.04651162790697" y="1161.0" />
+      <point x="452.0697674418607" y="1161.0" />
+      <point x="0.0" y="116.5" />
+    </edge>
+    <edge source="hospitalmanagementsystem.Doctor" target="hospitalmanagementsystem.User" relationship="GENERALIZATION">
+      <point x="0.0" y="-116.5" />
+      <point x="452.0697674418607" y="685.0" />
+      <point x="1241.497093023256" y="685.0" />
+      <point x="0.0" y="334.5" />
+    </edge>
+    <edge source="hospitalmanagementsystem.Receptionist" target="hospitalmanagementsystem.AuthenticationManager" relationship="TO_ONE">
+      <point x="103.25" y="-176.5" />
+      <point x="2235.546511627907" y="675.0" />
+      <point x="2137.296511627907" y="675.0" />
+      <point x="0.0" y="188.5" />
+    </edge>
+    <edge source="hospitalmanagementsystem.Appointment" target="hospitalmanagementsystem.Procedure" relationship="TO_ONE">
+      <point x="0.0" y="-214.5" />
+      <point x="707.4941860465117" y="1191.0" />
+      <point x="600.5465116279071" y="1191.0" />
+      <point x="600.5465116279071" y="1181.0" />
+      <point x="1875.546511627907" y="1181.0" />
+      <point x="1875.546511627907" y="1171.0" />
+      <point x="1842.046511627907" y="1171.0" />
+      <point x="63.75" y="202.5" />
+    </edge>
+    <edge source="hospitalmanagementsystem.DiagnosticTest" target="hospitalmanagementsystem.Procedure" relationship="GENERALIZATION">
+      <point x="0.0" y="-130.5" />
+      <point x="1516.247093023256" y="1161.0" />
+      <point x="1714.546511627907" y="1161.0" />
+      <point x="-63.75" y="202.5" />
+    </edge>
+    <edge source="hospitalmanagementsystem.BillingStatement" target="hospitalmanagementsystem.Procedure" relationship="TO_ONE">
+      <point x="-105.0" y="-129.5" />
+      <point x="1610.747093023256" y="1667.0" />
+      <point x="1710.747093023256" y="1667.0" />
+      <point x="1710.747093023256" y="1191.0" />
+      <point x="1875.546511627907" y="1191.0" />
+      <point x="1875.546511627907" y="1171.0" />
+      <point x="1842.046511627907" y="1171.0" />
+      <point x="63.75" y="202.5" />
+    </edge>
+    <edge source="hospitalmanagementsystem.CheckUp" target="hospitalmanagementsystem.Room" relationship="TO_ONE">
+      <point x="-90.0" y="-118.5" />
+      <point x="214.9941860465117" y="1191.0" />
+      <point x="157.04651162790697" y="1191.0" />
+      <point x="157.04651162790697" y="1151.0" />
+      <point x="-5.5" y="1151.0" />
+      <point x="0.0" y="154.5" />
+    </edge>
+    <edge source="hospitalmanagementsystem.Receptionist" target="hospitalmanagementsystem.User" relationship="GENERALIZATION">
+      <point x="-103.25" y="-176.5" />
+      <point x="2029.046511627907" y="685.0" />
+      <point x="1241.497093023256" y="685.0" />
+      <point x="0.0" y="334.5" />
+    </edge>
+    <edge source="hospitalmanagementsystem.Admin" target="hospitalmanagementsystem.AuthenticationManager" relationship="TO_ONE">
+      <point x="107.75" y="-104.5" />
+      <point x="1523.046511627907" y="675.0" />
+      <point x="2137.296511627907" y="675.0" />
+      <point x="0.0" y="188.5" />
+    </edge>
+    <edge source="hospitalmanagementsystem.Appointment" target="hospitalmanagementsystem.Room" relationship="TO_ONE">
+      <point x="0.0" y="-214.5" />
+      <point x="707.4941860465117" y="1191.0" />
+      <point x="600.5465116279071" y="1191.0" />
+      <point x="600.5465116279071" y="1141.0" />
+      <point x="-5.5" y="1141.0" />
+      <point x="0.0" y="154.5" />
+    </edge>
+    <edge source="hospitalmanagementsystem.Admin" target="hospitalmanagementsystem.User" relationship="GENERALIZATION">
+      <point x="-107.75" y="-104.5" />
+      <point x="1307.546511627907" y="685.0" />
+      <point x="1241.497093023256" y="685.0" />
+      <point x="0.0" y="334.5" />
+    </edge>
+    <edge source="hospitalmanagementsystem.MedicalRecord" target="hospitalmanagementsystem.Procedure" relationship="TO_ONE">
+      <point x="95.25" y="-106.5" />
+      <point x="2231.4970930232557" y="1667.0" />
+      <point x="2141.2470930232557" y="1667.0" />
+      <point x="2141.2470930232557" y="1191.0" />
+      <point x="1875.546511627907" y="1191.0" />
+      <point x="1875.546511627907" y="1171.0" />
+      <point x="1842.046511627907" y="1171.0" />
+      <point x="63.75" y="202.5" />
+    </edge>
+    <edge source="hospitalmanagementsystem.CheckUp" target="hospitalmanagementsystem.Procedure" relationship="GENERALIZATION">
+      <point x="90.0" y="-118.5" />
+      <point x="394.9941860465117" y="1171.0" />
+      <point x="1516.247093023256" y="1171.0" />
+      <point x="1516.247093023256" y="1161.0" />
+      <point x="1714.546511627907" y="1161.0" />
+      <point x="-63.75" y="202.5" />
+    </edge>
+    <edge source="hospitalmanagementsystem.Patient" target="hospitalmanagementsystem.User" relationship="GENERALIZATION">
+      <point x="0.0" y="-116.5" />
+      <point x="881.5000000000001" y="685.0" />
+      <point x="1241.497093023256" y="685.0" />
+      <point x="0.0" y="334.5" />
+    </edge>
+    <edge source="hospitalmanagementsystem.BillingStatement" target="hospitalmanagementsystem.Document" relationship="GENERALIZATION">
+      <point x="105.0" y="-129.5" />
+      <point x="1820.747093023256" y="1667.0" />
+      <point x="1911.75" y="1667.0" />
+      <point x="0.0" y="105.5" />
+    </edge>
+    <edge source="hospitalmanagementsystem.Appointment" target="hospitalmanagementsystem.Patient" relationship="TO_ONE">
+      <point x="0.0" y="-214.5" />
+      <point x="707.4941860465117" y="1191.0" />
+      <point x="600.5465116279071" y="1191.0" />
+      <point x="600.5465116279071" y="1161.0" />
+      <point x="881.5000000000001" y="1161.0" />
+      <point x="0.0" y="116.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.28645640074211504" showDependencies="true" x="844.9365284974092" y="1659.6450777202072" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
