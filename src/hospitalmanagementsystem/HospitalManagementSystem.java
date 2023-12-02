@@ -309,7 +309,11 @@ public class HospitalManagementSystem {
 
                 receptionistMenu(user, authManager);
             case 3:
-                ((Receptionist)user).checkAvailableRooms();
+                List<Room> rooms = new ArrayList<>(((Receptionist)user).checkAvailableRooms());
+                for (int i = 0; i < rooms.size(); i++) {
+                    Room room = rooms.get(i);
+                    System.out.println((i + 1) + ". Room Number: " + room.getRoomNo() + ", Type: " + room.getType());
+                }
                 receptionistMenu(user, authManager);
 
             case 4:
